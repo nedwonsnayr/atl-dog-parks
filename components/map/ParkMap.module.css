@@ -1,0 +1,86 @@
+.root {
+  position: relative;
+  min-height: 24rem;
+  overflow: hidden;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.5rem;
+  background: #f4f4f5;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.status {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  color: #52525b;
+  font-size: 0.875rem;
+  text-align: center;
+  background: #f4f4f5;
+}
+
+.error {
+  color: #991b1b;
+  background: #fef2f2;
+}
+
+.locationMarker {
+  width: 1rem;
+  height: 1rem;
+  border: 3px solid #fff;
+  border-radius: 9999px;
+  background: #2563eb;
+  box-shadow: 0 0 0 2px #1d4ed8;
+}
+
+.popup {
+  min-width: 13rem;
+  color: #18181b;
+}
+
+.popupTitle {
+  margin: 0 1.5rem 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.popupAddress {
+  margin: 0 0 0.75rem;
+  color: #52525b;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.popupLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.75rem;
+  margin: 0;
+}
+
+.popupLink {
+  color: #075985;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.125rem;
+}
+
+.popupLink:focus-visible {
+  border-radius: 0.125rem;
+  outline: 2px solid #0369a1;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root :global(.maplibregl-canvas) {
+    scroll-behavior: auto;
+  }
+}
