@@ -1,0 +1,37 @@
+{
+  "slug": "freedom-barkway",
+  "name": "Freedom Barkway",
+  "type": "public",
+  "status": "published",
+  "description": "A fenced, volunteer-supported dog park tucked into Freedom Park near the Freedom Parkway trail. It has a large open field with mature shade trees and a separate small-dog area, and it is easy to reach on foot or by bike from Poncey-Highland and Inman Park.",
+  "address": "Freedom Park, N Highland Ave NE & Freedom Pkwy NE, Atlanta, GA 30307",
+  "lat": 33.768,
+  "lng": -84.353,
+  "neighborhood": "Poncey-Highland",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "amenities": {
+    "fenced": true,
+    "offLeash": true,
+    "smallDogArea": true,
+    "water": true,
+    "shade": true,
+    "lighting": false,
+    "parking": false,
+    "restrooms": false,
+    "surface": ["grass", "dirt"]
+  },
+  "fees": { "free": true },
+  "hours": "Dawn to dusk",
+  "rules": ["Owners must remain with their dogs at all times", "Clean up after your dog"],
+  "permitRequired": false,
+  "lastVerified": "2026-09-01",
+  "sources": [
+    {
+      "label": "Freedom Park Conservancy",
+      "url": "https://www.freedompark.org/",
+      "retrievedAt": "2026-09-01"
+    }
+  ],
+  "manualOverrides": []
+}
