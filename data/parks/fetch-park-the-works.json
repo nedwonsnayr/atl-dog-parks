@@ -1,0 +1,49 @@
+{
+  "slug": "fetch-park-the-works",
+  "name": "Fetch Park at The Works",
+  "type": "business",
+  "status": "published",
+  "description": "A staffed dog park and social venue at The Works on Atlanta's Upper Westside, operated as part of the Fetch Park network.",
+  "address": "Chattahoochee Row Northwest, Atlanta, GA 30318",
+  "lat": 33.804394,
+  "lng": -84.4275585,
+  "neighborhood": "Underwood Hills",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/1201818894",
+  "website": "https://fetchpark.com/",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": false,
+    "details": "Membership or day pass required"
+  },
+  "hours": "See business website for current hours",
+  "rules": [],
+  "permitRequired": true,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/1201818894",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "label": "Fetch Park",
+      "url": "https://fetchpark.com/",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "slug": "adair-dog-park",
+  "name": "Adair Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A neighborhood dog park beside Adair Park in Decatur, with public access from West Trinity Place and a dedicated area mapped for dog recreation.",
+  "address": "716 West Trinity Place, Decatur, GA 30030",
+  "lat": 33.771902,
+  "lng": -84.304908,
+  "neighborhood": "Adair Park",
+  "city": "Decatur",
+  "county": "DeKalb",
+  "osmId": "way/1499101830",
+  "website": "https://adairpark.com",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/1499101830",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "label": "Adair Park community site",
+      "url": "https://adairpark.com",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

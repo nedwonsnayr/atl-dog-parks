@@ -1,0 +1,43 @@
+{
+  "slug": "hartsfield-jackson-dog-park",
+  "name": "Hartsfield-Jackson Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A fenced artificial-turf dog relief and exercise area at Hartsfield-Jackson Atlanta International Airport, convenient for airport visitors.",
+  "address": "6000 North Terminal Parkway, Atlanta, GA 30320",
+  "lat": 33.6402085,
+  "lng": -84.4467804,
+  "neighborhood": "Hartsfield-Jackson Atlanta International Airport",
+  "city": "Atlanta",
+  "county": "Clayton",
+  "osmId": "way/697038284",
+  "amenities": {
+    "fenced": true,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": [
+      "turf"
+    ]
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/697038284",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

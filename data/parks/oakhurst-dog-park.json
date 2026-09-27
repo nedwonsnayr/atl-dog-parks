@@ -1,0 +1,41 @@
+{
+  "slug": "oakhurst-dog-park",
+  "name": "Oakhurst Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A fenced public dog park serving Decatur's Oakhurst neighborhood, located by East Lake Drive with a dedicated off-leash enclosure.",
+  "address": "414 East Lake Drive, Decatur, GA 30030",
+  "lat": 33.7602518,
+  "lng": -84.3099832,
+  "neighborhood": "Oakhurst",
+  "city": "Decatur",
+  "county": "DeKalb",
+  "osmId": "way/271119579",
+  "amenities": {
+    "fenced": true,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/271119579",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

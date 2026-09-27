@@ -1,0 +1,41 @@
+{
+  "slug": "kirkwood-dog-park",
+  "name": "Kirkwood Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A fenced neighborhood dog park reached from the Trolley Line Trail in Kirkwood, mapped as a dedicated dog recreation area since 2019.",
+  "address": "Trolley Line Trail, Atlanta, GA 30317",
+  "lat": 33.7556552,
+  "lng": -84.3311987,
+  "neighborhood": "Kirkwood",
+  "city": "Atlanta",
+  "county": "DeKalb",
+  "osmId": "way/818870447",
+  "amenities": {
+    "fenced": true,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/818870447",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

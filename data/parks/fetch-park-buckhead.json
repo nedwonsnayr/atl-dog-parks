@@ -1,0 +1,51 @@
+{
+  "slug": "fetch-park-buckhead",
+  "name": "Fetch Park Buckhead",
+  "type": "business",
+  "status": "published",
+  "description": "A privately operated dog park and social venue in Buckhead, with an artificial-turf play area managed by Fetch Park staff.",
+  "address": "309 Buckhead Avenue Northeast, Atlanta, GA 30305",
+  "lat": 33.8378681,
+  "lng": -84.3773752,
+  "neighborhood": "Buckhead Village",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/1170387323",
+  "website": "https://fetchpark.com/",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": [
+      "turf"
+    ]
+  },
+  "fees": {
+    "free": false,
+    "details": "Membership or day pass required"
+  },
+  "hours": "See business website for current hours",
+  "rules": [],
+  "permitRequired": true,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/1170387323",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "label": "Fetch Park",
+      "url": "https://fetchpark.com/",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

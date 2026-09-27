@@ -1,0 +1,41 @@
+{
+  "slug": "south-bend-dog-park",
+  "name": "South Bend Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A fenced public dog park in South Bend Park near Lakewood Raceway, providing a dedicated off-leash enclosure in southeast Atlanta.",
+  "address": "Lakewood Raceway, Atlanta, GA 30315",
+  "lat": 33.7001538,
+  "lng": -84.3890995,
+  "neighborhood": "South Bend",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/740777180",
+  "amenities": {
+    "fenced": true,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/740777180",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

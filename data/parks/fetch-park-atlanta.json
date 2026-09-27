@@ -3,39 +3,49 @@
   "name": "Fetch Park Atlanta",
   "type": "business",
   "status": "published",
-  "description": "A membership-based off-leash dog park and bar next to the BeltLine Eastside Trail. Dogs play on artificial turf under the watch of staff while owners grab food and drinks; day passes are available for visitors who do not want a membership.",
-  "address": "520 Daniel St SE, Atlanta, GA 30312",
-  "lat": 33.7445,
-  "lng": -84.365,
-  "neighborhood": "Grant Park",
+  "description": "A privately operated off-leash dog park and social venue on Daniel Street, with a fenced artificial-turf play area for registered dogs.",
+  "address": "520 Daniel Street Southeast, Atlanta, GA 30312",
+  "lat": 33.7519921,
+  "lng": -84.3708033,
+  "neighborhood": "Old Fourth Ward",
   "city": "Atlanta",
   "county": "Fulton",
+  "osmId": "way/737362868",
   "website": "https://fetchpark.com/",
   "amenities": {
     "fenced": true,
     "offLeash": true,
-    "smallDogArea": true,
-    "water": true,
-    "shade": true,
-    "lighting": true,
-    "parking": true,
-    "restrooms": true,
-    "surface": ["turf"]
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": [
+      "turf"
+    ]
   },
-  "fees": { "free": false, "details": "Membership or day pass required" },
-  "hours": "See website for current hours",
-  "rules": [
-    "Proof of current vaccinations required",
-    "Dogs over 6 months must be spayed or neutered"
-  ],
+  "fees": {
+    "free": false,
+    "details": "Membership or day pass required"
+  },
+  "hours": "See business website for current hours",
+  "rules": [],
   "permitRequired": true,
-  "lastVerified": "2026-09-01",
+  "lastVerified": "2026-09-27",
   "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/737362868",
+      "retrievedAt": "2026-09-27"
+    },
     {
       "label": "Fetch Park",
       "url": "https://fetchpark.com/",
-      "retrievedAt": "2026-09-01"
+      "retrievedAt": "2026-09-27"
     }
   ],
-  "manualOverrides": []
+  "manualOverrides": [
+    "description"
+  ]
 }

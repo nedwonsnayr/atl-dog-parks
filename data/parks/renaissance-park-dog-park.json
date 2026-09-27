@@ -1,0 +1,41 @@
+{
+  "slug": "renaissance-park-dog-park",
+  "name": "Renaissance Park Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "Two adjacent dog-park enclosures in Renaissance Park provide separately mapped spaces for large and small dogs near Downtown Atlanta.",
+  "address": "Renaissance Park, Atlanta, GA 30308",
+  "lat": 33.7682814,
+  "lng": -84.3812842,
+  "neighborhood": "SoNo",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/801455427",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": true,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/801455427",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

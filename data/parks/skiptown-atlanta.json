@@ -1,0 +1,49 @@
+{
+  "slug": "skiptown-atlanta",
+  "name": "Skiptown Atlanta",
+  "type": "business",
+  "status": "published",
+  "description": "A commercial dog park and pet-care venue on Arizona Avenue in Candler Park, offering supervised services and a social play setting.",
+  "address": "Arizona Avenue Northeast, Atlanta, GA 30307",
+  "lat": 33.7591331,
+  "lng": -84.3321696,
+  "neighborhood": "Candler Park",
+  "city": "Atlanta",
+  "county": "DeKalb",
+  "osmId": "way/51284093",
+  "website": "https://skiptown.io/locations/atlanta-ga",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": false,
+    "details": "Paid entry or membership required"
+  },
+  "hours": "See business website for current hours",
+  "rules": [],
+  "permitRequired": true,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/51284093",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "label": "Skiptown Atlanta",
+      "url": "https://skiptown.io/locations/atlanta-ga",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

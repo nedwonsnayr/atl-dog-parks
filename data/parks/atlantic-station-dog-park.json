@@ -1,0 +1,41 @@
+{
+  "slug": "atlantic-station-dog-park",
+  "name": "Atlantic Station Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A compact dog park within the Atlantic Station district, providing an in-town exercise stop near the neighborhood's shops and residences.",
+  "address": "Atlantic Station, Atlanta, GA 30363",
+  "lat": 33.7903339,
+  "lng": -84.3990289,
+  "neighborhood": "Atlantic Station",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/884897815",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/884897815",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

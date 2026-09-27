@@ -1,0 +1,41 @@
+{
+  "slug": "ormewood-dog-yard",
+  "name": "Ormewood Dog Yard",
+  "type": "public",
+  "status": "published",
+  "description": "A small neighborhood dog recreation area along Delaware Avenue in Ormewood, identified in OpenStreetMap as a dedicated dog park.",
+  "address": "Delaware Avenue Southeast, Atlanta, GA 30316",
+  "lat": 33.7309375,
+  "lng": -84.3529581,
+  "neighborhood": "Ormewood Park",
+  "city": "Atlanta",
+  "county": "Fulton",
+  "osmId": "way/742697065",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/742697065",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}

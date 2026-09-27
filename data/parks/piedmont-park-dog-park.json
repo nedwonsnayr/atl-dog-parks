@@ -3,40 +3,45 @@
   "name": "Piedmont Park Dog Park",
   "type": "public",
   "status": "published",
-  "description": "A roughly three-acre off-leash area on the north side of Piedmont Park with separate enclosures for large and small dogs, shade trees, and water fountains. It is one of the busiest dog parks in the city, so weekday mornings are the calmest time to visit.",
-  "address": "400 Park Dr NE, Atlanta, GA 30306",
-  "lat": 33.7862,
-  "lng": -84.3709,
+  "description": "A dedicated off-leash destination within Piedmont Park, with separately mapped enclosures that accommodate both smaller and larger dogs.",
+  "address": "400 Park Drive Northeast, Atlanta, GA 30306",
+  "lat": 33.7878787,
+  "lng": -84.3713409,
   "neighborhood": "Midtown",
   "city": "Atlanta",
   "county": "Fulton",
+  "osmId": "way/182396488",
   "website": "https://piedmontpark.org/things-to-do/dog-parks/",
   "amenities": {
     "fenced": true,
     "offLeash": true,
     "smallDogArea": true,
-    "water": true,
-    "shade": true,
+    "water": null,
+    "shade": null,
     "lighting": null,
-    "parking": true,
+    "parking": null,
     "restrooms": null,
-    "surface": ["gravel"]
+    "surface": []
   },
-  "fees": { "free": true },
-  "hours": "6am-11pm daily",
-  "rules": [
-    "Dogs must be vaccinated and wear a license tag",
-    "Owners must clean up after their dogs",
-    "No dogs in heat"
-  ],
+  "fees": {
+    "free": true
+  },
+  "rules": [],
   "permitRequired": false,
-  "lastVerified": "2026-09-01",
+  "lastVerified": "2026-09-27",
   "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/182396488",
+      "retrievedAt": "2026-09-27"
+    },
     {
       "label": "Piedmont Park Conservancy",
       "url": "https://piedmontpark.org/things-to-do/dog-parks/",
-      "retrievedAt": "2026-09-01"
+      "retrievedAt": "2026-09-27"
     }
   ],
-  "manualOverrides": ["description"]
+  "manualOverrides": [
+    "description"
+  ]
 }

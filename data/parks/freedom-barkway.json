@@ -3,35 +3,45 @@
   "name": "Freedom Barkway",
   "type": "public",
   "status": "published",
-  "description": "A fenced, volunteer-supported dog park tucked into Freedom Park near the Freedom Parkway trail. It has a large open field with mature shade trees and a separate small-dog area, and it is easy to reach on foot or by bike from Poncey-Highland and Inman Park.",
-  "address": "Freedom Park, N Highland Ave NE & Freedom Pkwy NE, Atlanta, GA 30307",
-  "lat": 33.768,
-  "lng": -84.353,
-  "neighborhood": "Poncey-Highland",
+  "description": "A fenced community dog park on Highland Avenue near Freedom Parkway, offering a dedicated off-leash space in central Atlanta.",
+  "address": "523 Highland Avenue Northeast, Atlanta, GA 30312",
+  "lat": 33.7606203,
+  "lng": -84.3705039,
+  "neighborhood": "Old Fourth Ward",
   "city": "Atlanta",
   "county": "Fulton",
+  "osmId": "way/824923679",
+  "website": "https://freedombarkway.com/",
   "amenities": {
     "fenced": true,
     "offLeash": true,
-    "smallDogArea": true,
-    "water": true,
-    "shade": true,
-    "lighting": false,
-    "parking": false,
-    "restrooms": false,
-    "surface": ["grass", "dirt"]
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
   },
-  "fees": { "free": true },
-  "hours": "Dawn to dusk",
-  "rules": ["Owners must remain with their dogs at all times", "Clean up after your dog"],
+  "fees": {
+    "free": true
+  },
+  "rules": [],
   "permitRequired": false,
-  "lastVerified": "2026-09-01",
+  "lastVerified": "2026-09-27",
   "sources": [
     {
-      "label": "Freedom Park Conservancy",
-      "url": "https://www.freedompark.org/",
-      "retrievedAt": "2026-09-01"
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/way/824923679",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "label": "Freedom Barkway",
+      "url": "https://freedombarkway.com/",
+      "retrievedAt": "2026-09-27"
     }
   ],
-  "manualOverrides": []
+  "manualOverrides": [
+    "description"
+  ]
 }

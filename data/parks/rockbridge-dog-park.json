@@ -1,0 +1,41 @@
+{
+  "slug": "rockbridge-dog-park",
+  "name": "Rockbridge Dog Park",
+  "type": "public",
+  "status": "published",
+  "description": "A DeKalb County-operated dog park on Rockbridge Road near Scottdale, mapped as a dedicated public dog recreation area.",
+  "address": "Rockbridge Road, Scottdale, GA 30083",
+  "lat": 33.783271,
+  "lng": -84.2446589,
+  "neighborhood": "Scottdale",
+  "city": "Scottdale",
+  "county": "DeKalb",
+  "osmId": "node/11294843584",
+  "amenities": {
+    "fenced": null,
+    "offLeash": true,
+    "smallDogArea": null,
+    "water": null,
+    "shade": null,
+    "lighting": null,
+    "parking": null,
+    "restrooms": null,
+    "surface": []
+  },
+  "fees": {
+    "free": true
+  },
+  "rules": [],
+  "permitRequired": false,
+  "lastVerified": "2026-09-27",
+  "sources": [
+    {
+      "label": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/node/11294843584",
+      "retrievedAt": "2026-09-27"
+    }
+  ],
+  "manualOverrides": [
+    "description"
+  ]
+}
