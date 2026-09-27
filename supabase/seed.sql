@@ -1,0 +1,2 @@
+-- Application data is user-generated. Create test users through local Studio or
+-- Inbucket so auth identities and confirmation state follow the normal flow.

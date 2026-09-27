@@ -1,9 +1,14 @@
-import type { AuthButtonProps } from "@/components/contracts";
+import Link from "next/link";
 
-export default function AuthButton({ className }: AuthButtonProps) {
+import type { AuthButtonProps } from "@/components/contracts";
+import { getAuthenticatedUser } from "@/lib/supabase/auth";
+
+export default async function AuthButton({ className }: AuthButtonProps) {
+  const user = await getAuthenticatedUser();
+
   return (
-    <span data-testid="auth-button" className={className}>
-      Sign in
-    </span>
+    <Link href={user ? "/account" : "/auth"} data-testid="auth-button" className={className}>
+      {user ? "Account" : "Sign in"}
+    </Link>
   );
 }
