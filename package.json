@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare:map-worker": "node scripts/copy-map-worker.mjs",
+    "predev": "npm run prepare:map-worker",
     "dev": "next dev",
+    "prebuild": "npm run prepare:map-worker",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

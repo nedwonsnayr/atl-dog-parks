@@ -21,9 +21,7 @@
     "lighting": null,
     "parking": null,
     "restrooms": null,
-    "surface": [
-      "turf"
-    ]
+    "surface": ["turf"]
   },
   "fees": {
     "free": false,
@@ -45,7 +43,5 @@
       "retrievedAt": "2026-09-27"
     }
   ],
-  "manualOverrides": [
-    "description"
-  ]
+  "manualOverrides": ["description"]
 }

@@ -14,7 +14,8 @@ import {
 type ConsentSnapshot = AdvertisingConsent | null | "loading";
 
 function getServerConsent(): ConsentSnapshot {
-  return "loading";
+  // The undecided banner is part of the first HTML paint, then storage can hide it.
+  return null;
 }
 
 export default function ConsentBanner() {

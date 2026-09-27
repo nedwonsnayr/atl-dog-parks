@@ -50,7 +50,7 @@ export default function SubmissionForm({ parkSlug }: SubmissionFormProps) {
 
   if (verified === null) {
     return (
-      <div data-testid="submission-form" data-park-slug={parkSlug}>
+      <div data-testid="submission-auth-loading" data-park-slug={parkSlug} role="status">
         Loading…
       </div>
     );
@@ -58,7 +58,7 @@ export default function SubmissionForm({ parkSlug }: SubmissionFormProps) {
 
   if (!verified) {
     return (
-      <div data-testid="submission-form" data-park-slug={parkSlug}>
+      <div data-testid="submission-sign-in-prompt" data-park-slug={parkSlug}>
         <a href="/auth" className="underline">
           Sign in with a verified email to submit changes.
         </a>

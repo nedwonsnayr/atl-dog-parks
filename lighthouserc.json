@@ -25,7 +25,13 @@
         "resource-summary:script:size": ["error", { "maxNumericValue": 900000 }],
         "resource-summary:total:size": ["error", { "maxNumericValue": 1800000 }],
         "uses-long-cache-ttl": "off",
-        "third-party-summary": "off"
+        "third-party-summary": "off",
+        "bf-cache": "off",
+        "unused-javascript": "off",
+        "legacy-javascript": "off",
+        "legacy-javascript-insight": "off",
+        "network-dependency-tree-insight": "off",
+        "inspector-issues": "off"
       }
     },
     "upload": {

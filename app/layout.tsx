@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import AuthButton from "@/components/auth/AuthButton";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import { publicEnv } from "@/lib/env";
@@ -39,7 +40,7 @@ const footerLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
@@ -59,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
-        <footer className="border-t border-zinc-200 text-sm text-zinc-600">
+        <footer className="border-t border-zinc-200 text-sm text-zinc-700 dark:border-zinc-800 dark:text-zinc-300">
           <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6">
             <nav aria-label="Footer" className="flex flex-wrap gap-4">
               {footerLinks.map((link) => (

@@ -3,7 +3,15 @@ import ParkCard from "./ParkCard";
 
 export type ParkListItem = Park & { distanceMiles?: number };
 
-export default function ParkList({ parks }: { parks: ParkListItem[] }) {
+export default function ParkList({
+  parks,
+  selectedSlug,
+  onSelect,
+}: {
+  parks: ParkListItem[];
+  selectedSlug?: string;
+  onSelect?: (slug: string) => void;
+}) {
   return (
     <div
       data-testid="park-list"
@@ -11,7 +19,13 @@ export default function ParkList({ parks }: { parks: ParkListItem[] }) {
       aria-label="Dog parks"
     >
       {parks.map((park) => (
-        <ParkCard key={park.slug} park={park} distanceMiles={park.distanceMiles} />
+        <ParkCard
+          key={park.slug}
+          park={park}
+          distanceMiles={park.distanceMiles}
+          selected={park.slug === selectedSlug}
+          onSelect={onSelect}
+        />
       ))}
     </div>
   );

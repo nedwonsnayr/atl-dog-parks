@@ -39,6 +39,7 @@ export default defineConfig({
         env: {
           PORT: String(port),
           NEXT_PUBLIC_SITE_URL: baseURL,
+          NEXT_PUBLIC_MAP_STYLE_URL: `${baseURL}/map-style-test.json`,
         },
       },
 });

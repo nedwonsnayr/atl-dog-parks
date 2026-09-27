@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/about"), changeFrequency: "monthly", priority: 0.4 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.2 },
     { url: absoluteUrl("/terms"), changeFrequency: "yearly", priority: 0.2 },
+    { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.2 },
   ];
   const parkRoutes: MetadataRoute.Sitemap = parks.map((park) => ({
     url: absoluteUrl(`/parks/${park.slug}`),

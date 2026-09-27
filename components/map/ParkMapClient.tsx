@@ -22,6 +22,8 @@ const SELECTED_PARK_LAYER_ID = "atl-dog-park-selected";
 const OPEN_FREE_MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 const DEMO_STYLE = "https://demotiles.maplibre.org/style.json";
 
+maplibregl.setWorkerUrl("/maplibre-gl-worker.mjs");
+
 const STYLE_URLS = Array.from(
   new Set([publicEnv.NEXT_PUBLIC_MAP_STYLE_URL, OPEN_FREE_MAP_STYLE, DEMO_STYLE]),
 );
@@ -191,7 +193,9 @@ function syncUserLocation(
     element.dataset.testid = "user-location-marker";
     element.setAttribute("role", "img");
     element.setAttribute("aria-label", "Your approximate location");
-    markerRef.current = new maplibregl.Marker({ element }).addTo(map);
+    markerRef.current = new maplibregl.Marker({ element })
+      .setLngLat([location.lng, location.lat])
+      .addTo(map);
   }
 
   // Coordinates only enter MapLibre's in-memory marker state; they are not added to tile requests.
@@ -334,7 +338,8 @@ export default function ParkMapClient({
             fitParks(map, parksRef.current);
           }
           setStatus("ready");
-        } catch {
+        } catch (error) {
+          console.error("Map initialization failed", error);
           readyRef.current = false;
           startMap(styleIndex + 1);
         }

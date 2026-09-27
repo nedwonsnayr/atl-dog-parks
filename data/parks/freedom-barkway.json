@@ -41,7 +41,5 @@
       "retrievedAt": "2026-09-27"
     }
   ],
-  "manualOverrides": [
-    "description"
-  ]
+  "manualOverrides": ["description"]
 }

@@ -30,6 +30,7 @@ export default function ParkExplorer({
   const pathname = usePathname();
   const [filters, setFilters] = useState(initialFilters);
   const [userLocation, setUserLocation] = useState<LatLng | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string>();
   const [isNavigating, startTransition] = useTransition();
 
   const updateFilters = (nextFilters: ParkFilters) => {
@@ -151,6 +152,8 @@ export default function ParkExplorer({
           <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
             <ParkMap
               parks={visibleParks}
+              selectedSlug={selectedSlug}
+              onSelect={setSelectedSlug}
               userLocation={userLocation}
               className="min-h-[32rem] w-full border-0"
             />
@@ -160,7 +163,7 @@ export default function ParkExplorer({
           </div>
         ) : (
           <div className="space-y-6">
-            <ParkList parks={visibleParks} />
+            <ParkList parks={visibleParks} selectedSlug={selectedSlug} onSelect={setSelectedSlug} />
             <AdSlot slot="list-inline" />
           </div>
         )}

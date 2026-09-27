@@ -5,20 +5,23 @@ Install Docker Desktop and the Supabase CLI, then run from the repository root:
 
 ```sh
 supabase start
+supabase status -o env
 ```
 
-The command prints the local API URL, anon key, service-role key, database URL,
-Studio URL, and Inbucket URL. Put the API URL and anon key in `.env.local`:
+Copy `.env.example` to `.env.local`, then copy the `API_URL`, `ANON_KEY`, and
+`SERVICE_ROLE_KEY` values printed by `supabase status -o env` into the matching
+application variables:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from supabase status>
-SUPABASE_SERVICE_ROLE_KEY=<service_role key from supabase status>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<ANON_KEY>
+SUPABASE_SERVICE_ROLE_KEY=<SERVICE_ROLE_KEY>
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=
 TURNSTILE_SECRET=
 ```
 
-Retrieve the values again with `supabase status`. Local defaults are:
+Do not commit `.env.local`. Retrieve the values again at any time with
+`supabase status -o env`. Local service URLs are:
 
 - API: `http://127.0.0.1:54321`
 - Studio: `http://127.0.0.1:54323`
@@ -29,7 +32,11 @@ Apply all migrations and seed from a clean database:
 
 ```sh
 supabase db reset
+npm run dev
 ```
+
+The local startup sequence is therefore `supabase start`, copy status values to
+`.env.local`, `supabase db reset`, then `npm run dev`.
 
 After creating a migration with `supabase migration new <name>`, apply pending
 migrations without resetting data:

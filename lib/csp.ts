@@ -24,11 +24,65 @@ const GOOGLE_AD_MEDIA = [
 
 const MAP_ORIGINS = [
   "https://tiles.openfreemap.org",
+  "https://demotiles.maplibre.org",
   "https://api.maptiler.com",
   "https://*.tile.openstreetmap.org",
 ];
 
+function configuredOrigin(envName: string): string | null {
+  try {
+    const value = process.env[envName];
+    return value ? new URL(value).origin : null;
+  } catch {
+    return null;
+  }
+}
+
+function isLoopbackHost(hostname: string): boolean {
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+}
+
+/** Loopback origins are a development convenience. Production CSP stays on public https hosts. */
+function originForThisEnvironment(origin: string | null): string | null {
+  if (!origin) return null;
+  try {
+    if (isLoopbackHost(new URL(origin).hostname) && process.env.NODE_ENV !== "development") {
+      return null;
+    }
+  } catch {
+    return null;
+  }
+  return origin;
+}
+
+function websocketOrigin(origin: string): string | null {
+  try {
+    const url = new URL(origin);
+    if (url.protocol === "http:") return `ws://${url.host}`;
+    if (url.protocol === "https:") return `wss://${url.host}`;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function unique(values: Array<string | null | undefined>): string[] {
+  return [...new Set(values.filter((value): value is string => Boolean(value)))];
+}
+
 function contentSecurityPolicy(): string {
+  const mapOrigins = unique([
+    ...MAP_ORIGINS,
+    originForThisEnvironment(configuredOrigin("NEXT_PUBLIC_MAP_STYLE_URL")),
+  ]);
+  const supabaseHttp = unique([
+    originForThisEnvironment(configuredOrigin("NEXT_PUBLIC_SUPABASE_URL")),
+  ]);
+  const supabaseSockets = unique(supabaseHttp.map(websocketOrigin));
+  // upgrade-insecure-requests rewrites same-origin dev assets and local Supabase to HTTPS.
+  const upgrade = configuredOrigin("NEXT_PUBLIC_SITE_URL")?.startsWith("https://")
+    ? [["upgrade-insecure-requests"]]
+    : [];
   const directives = [
     ["default-src", "'self'"],
     [
@@ -45,7 +99,9 @@ function contentSecurityPolicy(): string {
       "'self'",
       "https://*.supabase.co",
       "wss://*.supabase.co",
-      ...MAP_ORIGINS,
+      ...supabaseHttp,
+      ...supabaseSockets,
+      ...mapOrigins,
       "https://challenges.cloudflare.com",
       ...GOOGLE_AD_CONNECTIONS,
     ],
@@ -55,7 +111,8 @@ function contentSecurityPolicy(): string {
       "data:",
       "blob:",
       "https://*.supabase.co",
-      ...MAP_ORIGINS,
+      ...supabaseHttp,
+      ...mapOrigins,
       ...GOOGLE_AD_MEDIA,
     ],
     ["font-src", "'self'", "data:"],
@@ -73,7 +130,7 @@ function contentSecurityPolicy(): string {
     ["base-uri", "'self'"],
     ["form-action", "'self'"],
     ["frame-ancestors", "'none'"],
-    ["upgrade-insecure-requests"],
+    ...upgrade,
   ];
 
   return directives.map((directive) => directive.join(" ")).join("; ");

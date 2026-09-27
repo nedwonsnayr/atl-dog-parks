@@ -8,12 +8,27 @@ const typeLabels: Record<Park["type"], string> = {
   "hoa/private": "Private park",
 };
 
-export default function ParkCard({ park, distanceMiles }: { park: Park; distanceMiles?: number }) {
+export default function ParkCard({
+  park,
+  distanceMiles,
+  selected = false,
+  onSelect,
+}: {
+  park: Park;
+  distanceMiles?: number;
+  selected?: boolean;
+  onSelect?: (slug: string) => void;
+}) {
   return (
     <article
       data-testid="park-card"
       data-park-slug={park.slug}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-emerald-700"
+      data-selected={selected || undefined}
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-zinc-950 ${
+        selected
+          ? "border-2 border-emerald-600 dark:border-emerald-400"
+          : "border border-zinc-200 hover:border-emerald-300 dark:border-zinc-800 dark:hover:border-emerald-700"
+      }`}
     >
       <div className="h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500" />
       <div className="flex flex-1 flex-col gap-4 p-5">
@@ -26,6 +41,8 @@ export default function ParkCard({ park, distanceMiles }: { park: Park; distance
           <h3 className="text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
             <Link
               href={`/parks/${park.slug}`}
+              onFocus={() => onSelect?.(park.slug)}
+              onPointerEnter={() => onSelect?.(park.slug)}
               className="rounded-sm outline-none after:absolute focus-visible:ring-2 focus-visible:ring-emerald-600 group-hover:text-emerald-700 dark:group-hover:text-emerald-300"
             >
               {park.name}
