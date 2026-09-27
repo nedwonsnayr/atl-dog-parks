@@ -1,0 +1,77 @@
+name: Refresh park data
+
+on:
+  schedule:
+    # GitHub cron has no every-other-week syntax; the gate below runs on even ISO weeks.
+    - cron: "17 9 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-parks
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Select biweekly run
+        id: cadence
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] || (( 10#$(date -u +%V) % 2 == 0 )); then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out repository
+        if: steps.cadence.outputs.run == 'true'
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        if: steps.cadence.outputs.run == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.cadence.outputs.run == 'true'
+        run: npm ci
+
+      - name: Refresh park records
+        if: steps.cadence.outputs.run == 'true'
+        env:
+          SCRAPER_USER_AGENT: AtlantaDogParksDataBot/1.0 (+https://github.com/nedwonsnayr/atl-dog-parks)
+        run: npm run --silent scrape -- --report=/tmp/refresh-parks-report.json > /tmp/refresh-parks-stdout.json
+
+      - name: Prepare pull request summary
+        if: steps.cadence.outputs.run == 'true'
+        shell: bash
+        run: |
+          {
+            echo "Automated biweekly park-source refresh."
+            echo
+            echo '```json'
+            jq '{asOf, sources, totals, linkChecks}' /tmp/refresh-parks-report.json
+            echo '```'
+            echo
+            echo "New records remain drafts, disappeared source records are flagged, and all changes require review."
+          } > /tmp/refresh-parks-pr.md
+          cat /tmp/refresh-parks-pr.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open refresh pull request
+        if: steps.cadence.outputs.run == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/refresh-parks
+          delete-branch: true
+          commit-message: "Refresh dog park source data"
+          title: "Refresh dog park source data"
+          body-path: /tmp/refresh-parks-pr.md
+          labels: data-refresh
