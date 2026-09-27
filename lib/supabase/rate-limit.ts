@@ -4,6 +4,7 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
 import { serverEnv } from "@/lib/env";
+import { allowMissingAbuseControls } from "@/lib/supabase/abuse-controls";
 
 const localHits = new Map<string, number[]>();
 
@@ -29,7 +30,7 @@ export async function checkWriteRateLimit(request: Request, userId: string) {
   const ip = requestIp(request);
 
   if (!env.UPSTASH_REDIS_REST_URL || !env.UPSTASH_REDIS_REST_TOKEN) {
-    if (process.env.NODE_ENV === "production") {
+    if (!allowMissingAbuseControls()) {
       return { allowed: false, status: 503, error: "Rate limiting is unavailable." };
     }
     const allowed = localLimit(`user:${userId}`, 10, 60_000) && localLimit(`ip:${ip}`, 30, 60_000);
@@ -59,10 +60,10 @@ export async function checkWriteRateLimit(request: Request, userId: string) {
     const allowed = userResult.success && ipResult.success;
     return { allowed, status: allowed ? 200 : 429, error: "Too many requests." };
   } catch {
-    return {
-      allowed: process.env.NODE_ENV !== "production",
-      status: 503,
-      error: "Rate limiting is unavailable.",
-    };
+    if (!allowMissingAbuseControls()) {
+      return { allowed: false, status: 503, error: "Rate limiting is unavailable." };
+    }
+    const allowed = localLimit(`user:${userId}`, 10, 60_000) && localLimit(`ip:${ip}`, 30, 60_000);
+    return { allowed, status: allowed ? 200 : 429, error: "Too many requests." };
   }
 }

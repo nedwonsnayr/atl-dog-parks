@@ -47,9 +47,16 @@ export const FeesSchema = z.object({
   details: z.string().min(1).optional(),
 });
 
+// Zod's URL check accepts any WHATWG URL, including javascript: and file:.
+// Park pages and the scraper only accept ordinary web links.
+const HttpUrl = z.url().refine((value) => {
+  const protocol = new URL(value).protocol;
+  return protocol === "http:" || protocol === "https:";
+}, "URL must use http or https");
+
 export const SourceSchema = z.object({
   label: z.string().min(1),
-  url: z.url(),
+  url: HttpUrl,
   retrievedAt: z.iso.date().optional(),
 });
 export type Source = z.infer<typeof SourceSchema>;
@@ -71,7 +78,7 @@ const ParkObjectSchema = z.object({
     .regex(/^(node|way|relation)\/\d+$/)
     .optional(),
   googlePlaceId: z.string().min(1).optional(),
-  website: z.url().optional(),
+  website: HttpUrl.optional(),
   amenities: AmenitiesSchema,
   fees: FeesSchema,
   hours: z.string().min(1).optional(),

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { serverEnv } from "@/lib/env";
+import { allowMissingAbuseControls } from "@/lib/supabase/abuse-controls";
 
 type TurnstileResponse = {
   success: boolean;
@@ -11,7 +12,7 @@ type TurnstileResponse = {
 export async function verifyTurnstile(token: unknown, request: Request) {
   const secret = serverEnv().TURNSTILE_SECRET;
   if (!secret) {
-    return process.env.NODE_ENV !== "production";
+    return allowMissingAbuseControls();
   }
   if (typeof token !== "string" || !token) return false;
 

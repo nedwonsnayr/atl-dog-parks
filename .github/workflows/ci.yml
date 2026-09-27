@@ -37,7 +37,10 @@ jobs:
         run: npm test
       - name: Validate park data
         run: npm run validate:parks
+      # The service-role key stays on pushes to main. pull_request runs the
+      # branch's own code, so it must not receive that credential.
       - name: Test row-level security when configured
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx tsx scripts/test-rls.ts
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
