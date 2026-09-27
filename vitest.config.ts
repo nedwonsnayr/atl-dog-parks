@@ -6,7 +6,9 @@ export default defineConfig({
     alias: { "@": path.resolve(__dirname) },
   },
   test: {
+    environment: "node",
+    include: ["**/*.{test,spec}.{ts,tsx}"],
     passWithNoTests: true,
-    exclude: ["node_modules/**", ".next/**", "e2e/**"],
+    exclude: ["e2e/**", "node_modules/**", ".next/**"],
   },
 });
