@@ -1,0 +1,5 @@
+# PLACEHOLDER ONLY — this file contains no authorized advertising seller.
+# Do not enable ads until AdSense approval and production consent setup are complete.
+# Replace these comments with the exact ads.txt line supplied in the approved AdSense account.
+# A valid Google entry resembles the format below, but never publish a sample publisher ID:
+# google.com, pub-<approved-publisher-id>, DIRECT, f08c47fec0942fa0
