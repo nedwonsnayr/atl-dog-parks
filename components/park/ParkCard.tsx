@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Park } from "@/lib/schema";
+import { visibleAddress } from "@/lib/seo";
+import { toSlug } from "@/lib/slug";
 import AmenityBadges from "./AmenityBadges";
 
 const typeLabels: Record<Park["type"], string> = {
@@ -49,8 +51,19 @@ export default function ParkCard({
             </Link>
           </h3>
           <p className="mt-1 text-sm font-medium text-zinc-600 dark:text-zinc-300">
-            {park.neighborhood} · {park.city}
+            <Link
+              href={`/neighborhoods/${toSlug(park.neighborhood)}`}
+              data-testid="park-neighborhood-link"
+              className="rounded-sm hover:text-emerald-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:hover:text-emerald-300"
+            >
+              {park.neighborhood}
+            </Link>
+            <span aria-hidden="true"> · </span>
+            {park.city}
           </p>
+          <address className="mt-1 text-sm not-italic leading-6 text-zinc-600 dark:text-zinc-300">
+            {visibleAddress(park)}
+          </address>
         </div>
 
         <p className="line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">

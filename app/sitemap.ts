@@ -1,9 +1,19 @@
 import type { MetadataRoute } from "next";
-import { publicEnv } from "@/lib/env";
 import { getAllParks, getNeighborhoods } from "@/lib/parks";
+import { PUBLIC_STATIC_PATHS, canonicalUrl } from "@/lib/seo";
 
-const absoluteUrl = (pathname: string) =>
-  new URL(pathname, publicEnv.NEXT_PUBLIC_SITE_URL).toString();
+const staticMeta: Record<
+  (typeof PUBLIC_STATIC_PATHS)[number],
+  Pick<MetadataRoute.Sitemap[number], "changeFrequency" | "priority">
+> = {
+  "/": { changeFrequency: "weekly", priority: 1 },
+  "/neighborhoods": { changeFrequency: "weekly", priority: 0.8 },
+  "/submit": { changeFrequency: "monthly", priority: 0.5 },
+  "/about": { changeFrequency: "monthly", priority: 0.4 },
+  "/privacy": { changeFrequency: "yearly", priority: 0.2 },
+  "/terms": { changeFrequency: "yearly", priority: 0.2 },
+  "/contact": { changeFrequency: "yearly", priority: 0.2 },
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const parks = getAllParks();
@@ -12,28 +22,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "2026-01-01",
   );
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl("/"), changeFrequency: "weekly", priority: 1 },
-    {
-      url: absoluteUrl("/neighborhoods"),
-      lastModified: latestVerification,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    { url: absoluteUrl("/submit"), changeFrequency: "monthly", priority: 0.5 },
-    { url: absoluteUrl("/about"), changeFrequency: "monthly", priority: 0.4 },
-    { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.2 },
-    { url: absoluteUrl("/terms"), changeFrequency: "yearly", priority: 0.2 },
-    { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.2 },
-  ];
+  const staticRoutes: MetadataRoute.Sitemap = PUBLIC_STATIC_PATHS.map((pathname) => ({
+    url: canonicalUrl(pathname),
+    lastModified: latestVerification,
+    ...staticMeta[pathname],
+  }));
   const parkRoutes: MetadataRoute.Sitemap = parks.map((park) => ({
-    url: absoluteUrl(`/parks/${park.slug}`),
+    url: canonicalUrl(`/parks/${park.slug}`),
     lastModified: park.lastVerified,
     changeFrequency: "weekly",
     priority: 0.9,
   }));
   const neighborhoodRoutes: MetadataRoute.Sitemap = getNeighborhoods().map((neighborhood) => ({
-    url: absoluteUrl(`/neighborhoods/${neighborhood.slug}`),
+    url: canonicalUrl(`/neighborhoods/${neighborhood.slug}`),
     lastModified: latestVerification,
     changeFrequency: "weekly",
     priority: 0.7,

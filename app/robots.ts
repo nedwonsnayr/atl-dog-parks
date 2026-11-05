@@ -1,16 +1,15 @@
 import type { MetadataRoute } from "next";
 import { publicEnv } from "@/lib/env";
+import { PRIVATE_PATH_PREFIXES, canonicalUrl } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = new URL(publicEnv.NEXT_PUBLIC_SITE_URL);
-
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/account/", "/api/"],
+      disallow: [...PRIVATE_PATH_PREFIXES],
     },
-    sitemap: new URL("/sitemap.xml", siteUrl).toString(),
-    host: siteUrl.origin,
+    sitemap: canonicalUrl("/sitemap.xml"),
+    host: new URL(publicEnv.NEXT_PUBLIC_SITE_URL).origin,
   };
 }

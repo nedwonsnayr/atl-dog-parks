@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ParkExplorer from "@/components/park/ParkExplorer";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 import { parseFilters, type SearchParamsInput } from "@/lib/filters";
 import { getNeighborhoods, getParksByNeighborhood } from "@/lib/parks";
+import { neighborhoodStructuredData, privatePageMetadata, publicPageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -17,20 +19,20 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const neighborhood = getNeighborhoods().find((item) => item.slug === slug);
-  if (!neighborhood) return { title: "Neighborhood not found" };
+  if (!neighborhood) {
+    return privatePageMetadata({
+      title: "Neighborhood not found",
+      description: "This neighborhood is not in the ATL Dog Parks directory.",
+    });
+  }
 
-  const description = `Compare dog parks in ${neighborhood.name}, Atlanta, including amenities, hours, fees, directions, and last-verified details.`;
-  return {
+  const listing = neighborhood.count === 1 ? "1 dog park" : `${neighborhood.count} dog parks`;
+  return publicPageMetadata({
     title: `Dog parks in ${neighborhood.name}`,
-    description,
-    alternates: { canonical: `/neighborhoods/${slug}` },
-    openGraph: {
-      title: `Dog parks in ${neighborhood.name}`,
-      description,
-      type: "website",
-      url: `/neighborhoods/${slug}`,
-    },
-  };
+    description: `Compare ${listing} in ${neighborhood.name}, Atlanta, including amenities, hours, fees, directions, and last-verified details.`,
+    // Filters on this page are shareable and canonicalize here, without the query string.
+    pathname: `/neighborhoods/${neighborhood.slug}`,
+  });
 }
 
 export default async function NeighborhoodPage({ params, searchParams }: Props) {
@@ -45,6 +47,7 @@ export default async function NeighborhoodPage({ params, searchParams }: Props) 
 
   return (
     <div className="space-y-8 pb-8">
+      <JsonLdScript data={neighborhoodStructuredData(neighborhood, parks)} />
       <nav aria-label="Breadcrumb" className="text-sm text-zinc-500 dark:text-zinc-400">
         <Link href="/neighborhoods" className="hover:text-emerald-700 hover:underline">
           Neighborhoods

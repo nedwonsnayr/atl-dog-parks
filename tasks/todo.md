@@ -76,8 +76,25 @@ Phase 2 is integrated on `feature/atl-dog-parks-integrated`. `main` and `origin/
 - These recommended-preset audits are off because they fail on this Next.js app without an app defect: `bf-cache` (dynamic `/` sends `Cache-Control: no-store`; Chrome marks it not actionable), `unused-javascript` and `legacy-javascript` (framework chunks and polyfills), `network-dependency-tree-insight` (score 0 on a same-origin CSS chain under 60 ms), and `inspector-issues` (Chrome logged a CSP issue with no URL while best-practices stayed at 96).
 - `npm run scrape -- --dry-run` exited 0. Overpass returned 28 records, Atlanta GIS 0, Sandy Springs 1. Totals: fetched 29, inside ITP 21, added 8, updated 7, flagged 2, unchanged 6. No park files were written.
 - `npm audit`: 10 issues (2 low, 1 moderate, 7 high), all through devDependency `@lhci/cli` (`lighthouse`, `puppeteer-core`, `extract-zip`, `tmp`, `uuid`). `npm audit --omit=dev` reports 0. No force-upgrade.
-- Local RLS was not run. Docker Desktop's daemon responds, but the `supabase` CLI is not on `PATH`, and `.env.local` is absent. No containers were started.
+- Local RLS and the signed-out smoke check ran after this review. Results are in "Local Supabase checks" below.
 
 ### Deployment
 
-Not deployed. There is no Vercel CLI, no `.vercel/project.json`, and no `.env.local`. Production still needs a Vercel project, a hosted Supabase project with migrations applied, and these variables: `NEXT_PUBLIC_SITE_URL` (https, so the CSP upgrade directive turns on), `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, Turnstile keys, and Upstash Redis. Leave ads disabled until an AdSense client id exists. Set `PLAYWRIGHT_SEEDED_REVIEWS` only for the optional review-fixture test. The RLS script runs in CI only on pushes to `main`, and it needs `RLS_TEST_UNVERIFIED_ACCESS_TOKEN` plus the Supabase secrets.
+Not deployed. There is no Vercel CLI and no `.vercel/project.json`. A gitignored `.env.local` exists for the local Docker stack only. Production still needs a Vercel project, a hosted Supabase project with migrations applied, and these variables: `NEXT_PUBLIC_SITE_URL` (https, so the CSP upgrade directive turns on), `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, Turnstile keys, and Upstash Redis. Leave ads disabled until an AdSense client id exists. Set `PLAYWRIGHT_SEEDED_REVIEWS` only for the optional review-fixture test. The RLS script runs in CI only on pushes to `main`, and it needs `RLS_TEST_UNVERIFIED_ACCESS_TOKEN` plus the Supabase secrets.
+
+## Local Supabase checks
+
+Run on 2026-09-27 from `feature/atl-dog-parks`. Nothing was committed or pushed. Docker containers were left running.
+
+- Supabase CLI 2.118.0, installed with Homebrew (`supabase/tap/supabase`), not as an npm dependency.
+- `supabase start`, then `supabase db reset`, applied `supabase/migrations/202609270001_initial_backend.sql` and `supabase/seed.sql`.
+- `.env.local` is gitignored. It has the local API URL (`http://127.0.0.1:54321`), anon key, service role key, `NEXT_PUBLIC_SITE_URL=http://localhost:3000`, and `RLS_TEST_UNVERIFIED_ACCESS_TOKEN` for a service-role user created with `email_confirm: false` (`email_confirmed_at` null). Turnstile, Upstash, the AdSense client, and GitHub variables are empty.
+- No config edits. Studio `api_url` in `supabase/config.toml` stayed `http://127.0.0.1`; startup succeeded without the API port.
+- `npx tsx scripts/test-rls.ts` exited 0:
+  - PASS anonymous users can read approved reviews
+  - PASS anonymous review and submission writes are denied
+  - PASS unverified review and submission writes are denied
+  - PASS verified users are limited to one review per park
+  - PASS verified users can edit owned reviews but not another user's review
+- `npm run dev` loaded `.env.local`. `GET /` returned 200 with title "ATL Dog Parks | Dog parks inside the Perimeter" and the park list. A signed-out `POST /api/reviews` returned 401 `{"error":"Sign in required."}`.
+- Stop the local containers from the repo root with `supabase stop`.

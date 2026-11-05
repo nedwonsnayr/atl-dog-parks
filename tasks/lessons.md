@@ -8,6 +8,11 @@ Patterns learned from corrections. Review at the start of each session.
 - Rule:
 -->
 
+## Protect the default branch
+
+- Mistake: Foundation work was committed before creating a feature branch.
+- Rule: Before the first project commit, verify the current branch and create a feature branch unless the user explicitly authorizes commits to the default branch.
+
 ## Auth redirects stay on-site
 
 - Mistake: Treating a leading slash as a safe `next` path still sends people off-site, because URL parsers accept `/\host` as a protocol-relative URL.

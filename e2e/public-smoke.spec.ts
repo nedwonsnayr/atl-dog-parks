@@ -7,7 +7,7 @@ test.describe("public park discovery", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByTestId("park-list")).toBeVisible();
     await expect(page.getByTestId("park-card").first()).toBeVisible();
-    await expect(page.getByTestId("park-card").first().getByRole("link")).toBeVisible();
+    await expect(page.getByTestId("park-card").first().getByRole("link").first()).toBeVisible();
     await expect(page.getByTestId("auth-button")).toBeVisible();
   });
 

@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
 import { moderate } from "@/app/admin/actions";
 import { getAuthenticatedUser, requireAdmin } from "@/lib/supabase/auth";
+import { privatePageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = privatePageMetadata({
+  title: "Moderation",
+  description: "Review pending ATL Dog Parks submissions and reviews.",
+});
 
 function ModerationButtons({ table, id }: { table: "reviews" | "submissions"; id: string }) {
   return (
@@ -37,7 +44,7 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <main className="mx-auto max-w-4xl space-y-8 px-4 py-10">
+    <div className="mx-auto max-w-4xl space-y-8 px-4 py-10">
       <h1 className="text-2xl font-bold">Moderation queue</h1>
       <section className="space-y-3">
         <h2 className="text-xl font-semibold">Reviews</h2>
@@ -65,6 +72,6 @@ export default async function AdminPage() {
         ))}
         {!submissions?.length && <p>No pending submissions.</p>}
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ParkExplorer from "@/components/park/ParkExplorer";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 import { parseFilters, type SearchParamsInput } from "@/lib/filters";
 import { getAllParks, getNeighborhoods } from "@/lib/parks";
+import { HOME_DESCRIPTION, HOME_TITLE, homeStructuredData, publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+// Filter query strings are shareable. They do not change this canonical URL.
+export const metadata: Metadata = publicPageMetadata({
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  pathname: "/",
+  absoluteTitle: true,
+});
 
 export default async function Home({ searchParams }: { searchParams: Promise<SearchParamsInput> }) {
   const [parks, neighborhoods, filters] = [
@@ -17,6 +23,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Sea
 
   return (
     <div className="space-y-10 pb-8">
+      <JsonLdScript data={homeStructuredData(parks)} />
       <section className="relative isolate overflow-hidden rounded-3xl bg-zinc-950 px-6 py-12 text-white shadow-xl sm:px-10 sm:py-16">
         <div
           aria-hidden="true"

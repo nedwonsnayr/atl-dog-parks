@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import AuthButton from "@/components/auth/AuthButton";
 import ConsentBanner from "@/components/consent/ConsentBanner";
 import { publicEnv } from "@/lib/env";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, canonicalUrl } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,12 +20,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.NEXT_PUBLIC_SITE_URL),
+  applicationName: SITE_NAME,
   title: {
-    default: "ATL Dog Parks | Dog parks inside the Perimeter",
-    template: "%s | ATL Dog Parks",
+    default: HOME_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Find dog parks inside I-285 in Atlanta: off-leash areas, amenities, hours, directions, and reviews.",
+  description: HOME_DESCRIPTION,
+  openGraph: {
+    title: { absolute: HOME_TITLE },
+    description: HOME_DESCRIPTION,
+    url: canonicalUrl("/"),
+    siteName: SITE_NAME,
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: { absolute: HOME_TITLE },
+    description: HOME_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 const navLinks = [

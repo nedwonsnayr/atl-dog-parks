@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms",
-  description: "Terms for using the ATL Dog Parks directory and contributing reviews or updates.",
-};
+export const metadata: Metadata = publicPageMetadata({
+  title: "Terms of use",
+  description:
+    "Terms for browsing ATL Dog Parks and for submitting reviews, park suggestions, and corrections.",
+  pathname: "/terms",
+});
 
 export default function TermsPage() {
   return (

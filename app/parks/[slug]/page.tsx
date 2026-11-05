@@ -8,7 +8,8 @@ import JsonLd from "@/components/park/JsonLd";
 import MapLinks from "@/components/park/MapLinks";
 import ReviewSection from "@/components/reviews/ReviewSection";
 import SubmissionForm from "@/components/submissions/SubmissionForm";
-import { getAllParks, getParkBySlug } from "@/lib/parks";
+import { getAllParks, getParkBySlug, getParksByNeighborhood } from "@/lib/parks";
+import { privatePageMetadata, publicPageMetadata, visibleAddress } from "@/lib/seo";
 import { toSlug } from "@/lib/slug";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -20,19 +21,18 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const park = getParkBySlug(slug);
-  if (!park) return { title: "Park not found" };
+  if (!park) {
+    return privatePageMetadata({
+      title: "Park not found",
+      description: "This dog park is not in the ATL Dog Parks directory.",
+    });
+  }
 
-  return {
+  return publicPageMetadata({
     title: park.name,
-    description: park.description,
-    alternates: { canonical: `/parks/${park.slug}` },
-    openGraph: {
-      title: park.name,
-      description: park.description,
-      type: "website",
-      url: `/parks/${park.slug}`,
-    },
-  };
+    description: `${park.name} in ${park.neighborhood}, ${park.city}. ${park.description}`,
+    pathname: `/parks/${park.slug}`,
+  });
 }
 
 export default async function ParkDetailPage({ params }: Props) {
@@ -40,6 +40,10 @@ export default async function ParkDetailPage({ params }: Props) {
   const park = getParkBySlug(slug);
   if (!park) notFound();
 
+  const neighborhoodSlug = toSlug(park.neighborhood);
+  const relatedParks = getParksByNeighborhood(neighborhoodSlug).filter(
+    (item) => item.slug !== park.slug,
+  );
   const verifiedDate = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
@@ -59,7 +63,7 @@ export default async function ParkDetailPage({ params }: Props) {
           /
         </span>
         <Link
-          href={`/neighborhoods/${toSlug(park.neighborhood)}`}
+          href={`/neighborhoods/${neighborhoodSlug}`}
           className="hover:text-emerald-700 hover:underline"
         >
           {park.neighborhood}
@@ -121,7 +125,9 @@ export default async function ParkDetailPage({ params }: Props) {
             <dl className="mt-5 grid gap-5 sm:grid-cols-2">
               <div>
                 <dt className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Address</dt>
-                <dd className="mt-1 leading-6">{park.address}</dd>
+                <dd className="mt-1">
+                  <address className="not-italic leading-6">{visibleAddress(park)}</address>
+                </dd>
               </div>
               <div>
                 <dt className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Hours</dt>
@@ -167,6 +173,36 @@ export default async function ParkDetailPage({ params }: Props) {
           <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
             <ParkMap parks={[park]} className="w-full border-0" />
           </div>
+
+          <section aria-labelledby="nearby-heading">
+            <h2 id="nearby-heading" className="text-2xl font-bold tracking-tight">
+              More dog parks in {park.neighborhood}
+            </h2>
+            {relatedParks.length ? (
+              <ul className="mt-4 space-y-2">
+                {relatedParks.map((related) => (
+                  <li key={related.slug}>
+                    <Link
+                      href={`/parks/${related.slug}`}
+                      className="font-semibold text-emerald-700 underline-offset-4 hover:underline dark:text-emerald-300"
+                    >
+                      {related.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-zinc-600 dark:text-zinc-300">
+                This is the only listing in {park.neighborhood} right now.
+              </p>
+            )}
+            <Link
+              href={`/neighborhoods/${neighborhoodSlug}`}
+              className="mt-4 inline-block text-sm font-semibold text-emerald-700 underline-offset-4 hover:underline dark:text-emerald-300"
+            >
+              All dog parks in {park.neighborhood}
+            </Link>
+          </section>
 
           <ReviewSection parkSlug={park.slug} />
 

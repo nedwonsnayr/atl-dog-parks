@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { deleteAccount, signOut, updateDisplayName } from "@/app/account/actions";
 import { getAuthenticatedUser } from "@/lib/supabase/auth";
 import { createClient } from "@/lib/supabase/server";
+import { privatePageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = privatePageMetadata({
+  title: "Account",
+  description: "Manage your ATL Dog Parks display name, sign-in, and account deletion.",
+});
 
 export default async function AccountPage() {
   const user = await getAuthenticatedUser();
@@ -17,7 +24,7 @@ export default async function AccountPage() {
     .maybeSingle();
 
   return (
-    <main className="mx-auto max-w-xl space-y-8 px-4 py-10">
+    <div className="mx-auto max-w-xl space-y-8 px-4 py-10">
       <div>
         <h1 className="text-2xl font-bold">Account</h1>
         <p className="text-sm text-zinc-600">{user.email}</p>
@@ -59,6 +66,6 @@ export default async function AccountPage() {
           </button>
         </form>
       </section>
-    </main>
+    </div>
   );
 }

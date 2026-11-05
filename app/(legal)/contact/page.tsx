@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicPageMetadata({
   title: "Contact",
-  description: "Contact ATL Dog Parks about corrections, privacy, licensing, or takedowns.",
-};
+  description:
+    "Contact ATL Dog Parks about park corrections, privacy requests, licensing, and takedown notices.",
+  pathname: "/contact",
+});
 
 export default function ContactPage() {
   return (

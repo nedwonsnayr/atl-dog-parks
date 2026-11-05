@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { privatePageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = privatePageMetadata({
+  title: "Neighborhood not found",
+  description: "This neighborhood is not in the ATL Dog Parks directory.",
+});
 
 export default function NeighborhoodNotFound() {
   return (

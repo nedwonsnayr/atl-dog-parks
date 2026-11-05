@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import SubmissionForm from "@/components/submissions/SubmissionForm";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicPageMetadata({
   title: "Suggest a dog park",
-  description: "Suggest a new dog park inside I-285 for the ATL Dog Parks directory.",
-  alternates: { canonical: "/submit" },
-};
+  description:
+    "Suggest a missing dog park or dog-friendly business inside I-285. Suggestions are reviewed before they are published.",
+  pathname: "/submit",
+});
 
 export default function SubmitPage() {
   return (

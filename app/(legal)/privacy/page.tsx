@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy",
-  description: "How ATL Dog Parks handles account, location, submission, cookie, and ad data.",
-};
+export const metadata: Metadata = publicPageMetadata({
+  title: "Privacy policy",
+  description:
+    "How ATL Dog Parks handles browsing, browser location, accounts, submissions, cookies, and advertising choices.",
+  pathname: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

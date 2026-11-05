@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getNeighborhoods } from "@/lib/parks";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Neighborhoods",
-  description: "Browse Atlanta dog parks by neighborhood, all inside the Perimeter.",
-  alternates: { canonical: "/neighborhoods" },
-};
+export const metadata: Metadata = publicPageMetadata({
+  title: "Dog parks by neighborhood",
+  description:
+    "Browse dog parks inside Atlanta's I-285 Perimeter by neighborhood, with park counts and a guide for each area.",
+  pathname: "/neighborhoods",
+});
 
 export default function NeighborhoodsPage() {
   const neighborhoods = getNeighborhoods();
